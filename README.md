@@ -22,6 +22,17 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 - [ ] Undo or redo
 - [ ] Beautiful UI
 
+## Development
+
+
+### Setting up github actions
+
+- Vite instructions fail as they're for npm and not bun
+- Setup bun using these two guides:
+  - https://bun.sh/guides/runtime/cicd
+  - [SO-77651333](https://stackoverflow.com/questions/77651333/how-to-deploy-a-static-website-project-with-bun-lockb-to-github-pages)
+
+
 
 ## React + TypeScript + Vite
 
