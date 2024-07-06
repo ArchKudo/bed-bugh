@@ -13,7 +13,7 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 - [ ] Works with linear DNA
 - [ ] Can edit bed file
 - [ ] Has two buttons to change results
-- [ ] Deploy to gh-pages
+- [x] Deploy to gh-pages
 
 ### Not in v0.1
 
@@ -23,7 +23,6 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 - [ ] Beautiful UI
 
 ## Development
-
 
 ### Setting up github actions
 
