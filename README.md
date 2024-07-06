@@ -9,8 +9,8 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 ### v0.1
 
 - [ ] Has two columns for fasta and bed
-- [ ] Works with lambda reference
-- [ ] Works with linear DNA
+- [x] Works with lambda reference
+- [x] Works with linear DNA
 - [ ] Can edit bed file
 - [ ] Has two buttons to change results
 - [x] Deploy to gh-pages
@@ -23,6 +23,10 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 - [ ] Beautiful UI
 
 ## Development
+
+### Importing seqviz
+
+- 
 
 ### Setting up github actions
 
