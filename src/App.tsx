@@ -1,6 +1,7 @@
 import "bulma/css/bulma.min.css";
 import { useEffect, useState } from "react";
 import { SeqViz } from "seqviz";
+import { Selection } from "seqviz/dist/selectionContext";
 import seqparse, { Seq } from "seqparse";
 
 function App() {
@@ -11,6 +12,12 @@ function App() {
     annotations: [],
   });
 
+  const [text, setText] = useState<string>("");
+
+  const appendText = (newText: string) => {
+    setText((prevText) => prevText + "\n" + newText);
+  };
+
   useEffect(() => {
     const fetchFASTA = async () => {
       const result = await seqparse("NC_001416.1");
@@ -19,6 +26,18 @@ function App() {
 
     fetchFASTA();
   }, []);
+
+  let selections: Selection[] = [];
+
+  let handleSelection = (selection: Selection) => {
+    selections.push(selection);
+  };
+
+  let handleCopyToBED = () => {
+    const pos = selections.pop();
+    let str = `NC_001416.1\t${pos?.start}\t${pos?.end}`
+    appendText(str)
+  };
 
   return (
     <>
@@ -32,15 +51,26 @@ function App() {
               annotations={seq.annotations}
               seqType={seq.type == "unknown" ? undefined : seq.type}
               viewer="linear"
+              onSelection={handleSelection}
             />
           </div>
         </div>
         <div className="column is-flex is-justify-content-center is-flex-direction-column">
-        <button className="button is-primary is-outlined">Copy selection to BED</button>
-        <button className="button is-primary is-inverted is-outlined">Find in FASTA</button>
+          <button
+            className="button is-primary is-outlined"
+            onClick={handleCopyToBED}
+          >
+            Copy selection to BED
+          </button>
+          <button className="button is-primary is-inverted is-outlined">
+            Find in FASTA
+          </button>
         </div>
         <div className="column is-four-fifths">
           <textarea
+            id="bedArea"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
             className="textarea has-fixed-size"
             placeholder="Enter BED File"
             style={{ height: "100%", maxHeight: "100%" }}
