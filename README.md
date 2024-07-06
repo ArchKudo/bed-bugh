@@ -6,14 +6,16 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 
 ## Project management
 
-### v0.1
+### v0.0.1
 
-- [ ] Has two columns for fasta and bed
+- [x] Has two columns for fasta and bed
 - [x] Works with lambda reference
 - [x] Works with linear DNA
-- [ ] Can edit bed file
-- [ ] Has two buttons to change results
+- [x] Can edit bed file
+- [x] Has two buttons to change results
 - [x] Deploy to gh-pages
+
+### v0.0.2
 
 ### Not in v0.1
 

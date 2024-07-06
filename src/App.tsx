@@ -23,7 +23,7 @@ function App() {
   return (
     <>
       <div className="columns">
-        <div className="column">
+        <div className="column is-half">
           <div className="text-area full-size">
             <SeqViz
               style={{ height: "100vh" }}
@@ -35,7 +35,11 @@ function App() {
             />
           </div>
         </div>
-        <div className="column">
+        <div className="column is-flex is-justify-content-center is-flex-direction-column">
+        <button className="button is-primary is-outlined">Copy selection to BED</button>
+        <button className="button is-primary is-inverted is-outlined">Find in FASTA</button>
+        </div>
+        <div className="column is-four-fifths">
           <textarea
             className="textarea has-fixed-size"
             placeholder="Enter BED File"
