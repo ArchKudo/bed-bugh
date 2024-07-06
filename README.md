@@ -1,6 +1,6 @@
 # बेड बघ 🧐 
 
-(*Marathi* Look at the bed)  
+(*Marathi for*) Look at the bed  
 Visually create bed files for references or visualize references given a bed file  
 Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 
@@ -17,12 +17,29 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 
 ### v0.0.2
 
-### Not in v0.1
+- [ ] Get sequence under selection
+- [ ] Highlight bed selection 
+
+### Defer to v0.1
 
 - [ ] Can edit reference
 - [ ] Can add multiple reference
 - [ ] Undo or redo
 - [ ] Beautiful UI
+- [ ] Download fasta, gtf, bed
+- [ ] Disable buttons depending on selection
+- [ ] Unittests
+- [ ] Support Mb genomes
+- [ ] Refactor
+- [ ] Add sections: hero, footer
+- [ ] Clear fasta, bed, all
+
+# Defer to v0.2
+
+- [ ] Showcase
+- [ ] Integration tests
+- [ ] Support hg38
+- [ ] 
 
 ## Development
 
