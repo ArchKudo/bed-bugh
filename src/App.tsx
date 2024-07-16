@@ -5,6 +5,54 @@ import { ExternalSelection, Selection } from "seqviz/dist/selectionContext";
 // import CentralIndexContext from "seqviz/dist/centralIndexContext";
 import seqparse, { Seq } from "seqparse";
 
+
+const FAQ = () => {
+  return (
+    <section id="faq" className="section">
+      <div className="container">
+        <h1 className="title">FAQ</h1>
+        <div className="content">
+          <ul>
+            <li>What does this app do?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+
+const Hero = () => {
+  return (
+    <section className="hero is-primary">
+      <div className="hero-body">
+        <div className="container">
+          <div className="level">
+            <div className="level-left">
+              <div className="level-item">
+                <h1 className="title">बेड बघ</h1>
+              </div>
+            </div>
+            <div className="level-right">
+              <div className="level-item">
+                <a href="https://github.com/ArchKudo/bed-bugh" className="has-text-white">
+                  GitHub
+                </a>
+              </div>
+              <div className="level-item">
+                <a href="#faq" className="has-text-white">
+                  FAQ
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 function App() {
   const [seq, setSeq] = useState<Seq>({
     name: "",
@@ -88,6 +136,7 @@ function App() {
 
   return (
     <>
+      <Hero />
       <div className="columns">
         <div className="column is-half">
           <div className="text-area full-size">
@@ -131,6 +180,7 @@ function App() {
           />
         </div>
       </div>
+      <FAQ />
     </>
   );
 }
