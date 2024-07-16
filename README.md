@@ -23,12 +23,17 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 
 ### v0.0.3
 
-- [ ] Draw rest of the owl
+- [x] Draw rest of the owl (Hero / Footer)
+
+### v0.0.4
+
+- [ ] Add drag and drop
 
 
 ### v0.0.1~alpha
 
 - [ ] central index instead of selection
+- [ ] Rewrite or refactor
 
 ### Defer to v0.1
 
@@ -41,7 +46,7 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 - [ ] Unittests
 - [ ] Support Mb genomes
 - [ ] Refactor
-- [ ] Add sections: hero, footer
+- [x] Add sections: hero, footer
 - [ ] Clear fasta, bed, all
 - [ ] Add MPL License
 
@@ -50,6 +55,7 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 - [ ] Showcase
 - [ ] Integration tests
 - [ ] Support hg38
+- [ ] faidx support
 
 ### Defer to v0.3
 
