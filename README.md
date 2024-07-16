@@ -27,7 +27,11 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 
 ### v0.0.4
 
-- [ ] Add drag and drop
+- [x] Add drag and drop
+
+### v0.0.5
+
+- [ ] Track fasta name, and add correct fasta to bed
 
 
 ### v0.0.1~alpha
@@ -37,7 +41,6 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 
 ### Defer to v0.1
 
-- [ ] Can edit reference
 - [ ] Can add multiple reference
 - [ ] Undo or redo
 - [ ] Beautiful UI
@@ -60,6 +63,10 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 ### Defer to v0.3
 
 - [ ] Move away from SeqViz
+
+### Won't Do
+
+- [ ] Can edit reference
 
 
 ## Development
