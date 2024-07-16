@@ -18,8 +18,17 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 ### v0.0.2
 
 - [x] Get sequence under selection
-- [ ] Highlight bed
-- [ ] Navigate to selection 
+- [-] Highlight bed
+- [-] Navigate to selection
+
+### v0.0.3
+
+- [ ] Draw rest of the owl
+
+
+### v0.0.1~alpha
+
+- [ ] central index instead of selection
 
 ### Defer to v0.1
 
@@ -36,11 +45,16 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 - [ ] Clear fasta, bed, all
 - [ ] Add MPL License
 
-# Defer to v0.2
+### Defer to v0.2
 
 - [ ] Showcase
 - [ ] Integration tests
 - [ ] Support hg38
+
+### Defer to v0.3
+
+- [ ] Move away from SeqViz
+
 
 ## Development
 
