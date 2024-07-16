@@ -1,5 +1,5 @@
 import "bulma/css/bulma.min.css";
-import { useContext, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { SeqViz } from "seqviz";
 import { Selection } from "seqviz/dist/selectionContext";
 // import CentralIndexContext from "seqviz/dist/centralIndexContext";
