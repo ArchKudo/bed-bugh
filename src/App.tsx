@@ -1,7 +1,8 @@
 import "bulma/css/bulma.min.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { SeqViz } from "seqviz";
 import { Selection } from "seqviz/dist/selectionContext";
+// import CentralIndexContext from "seqviz/dist/centralIndexContext";
 import seqparse, { Seq } from "seqparse";
 
 function App() {
@@ -35,8 +36,42 @@ function App() {
 
   let handleCopyToBED = () => {
     const pos = selections.pop();
-    let str = `NC_001416.1\t${pos?.start}\t${pos?.end}`
-    appendText(str)
+    let str = `NC_001416.1\t${pos?.start}\t${pos?.end}`;
+    appendText(str);
+  };
+
+  // const posContext = useContext(CentralIndexContext);
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  let handleFindInFasta = () => {
+    const textArea = textareaRef.current;
+    if (textArea) {
+      const text = textArea.value;
+      const cursorPosition = textArea.selectionStart;
+
+      const lines = text.split("\n");
+
+      // Find the line under the cursor
+      let currentLine = "";
+      let cumulativeLength = 0;
+      for (const line of lines) {
+        cumulativeLength += line.length + 1; // +1 for the newline character
+        if (cursorPosition < cumulativeLength) {
+          currentLine = line;
+          break;
+        }
+      }
+
+      const parts = currentLine.split("\t");
+      if (parts.length >= 3) {
+        const firstNumber = parts[1];
+        const secondNumber = parts[2];
+        alert(`(${firstNumber}, ${secondNumber})`);
+      } else {
+        alert("Invalid line format");
+      }
+    }
   };
 
   return (
@@ -62,12 +97,16 @@ function App() {
           >
             Copy selection to BED
           </button>
-          <button className="button is-primary is-inverted is-outlined">
+          <button
+            className="button is-primary is-inverted is-outlined"
+            onClick={handleFindInFasta}
+          >
             Find in FASTA
           </button>
         </div>
         <div className="column is-four-fifths">
           <textarea
+            ref={textareaRef}
             id="bedArea"
             value={text}
             onChange={(e) => setText(e.target.value)}

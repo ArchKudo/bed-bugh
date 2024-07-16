@@ -17,8 +17,9 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 
 ### v0.0.2
 
-- [ ] Get sequence under selection
-- [ ] Highlight bed selection 
+- [x] Get sequence under selection
+- [ ] Highlight bed
+- [ ] Navigate to selection 
 
 ### Defer to v0.1
 
@@ -33,13 +34,13 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 - [ ] Refactor
 - [ ] Add sections: hero, footer
 - [ ] Clear fasta, bed, all
+- [ ] Add MPL License
 
 # Defer to v0.2
 
 - [ ] Showcase
 - [ ] Integration tests
 - [ ] Support hg38
-- [ ] 
 
 ## Development
 
