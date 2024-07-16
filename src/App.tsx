@@ -1,10 +1,8 @@
 import "bulma/css/bulma.min.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { SeqViz } from "seqviz";
 import { ExternalSelection, Selection } from "seqviz/dist/selectionContext";
-// import CentralIndexContext from "seqviz/dist/centralIndexContext";
 import seqparse, { Seq } from "seqparse";
-
 
 const FAQ = () => {
   return (
@@ -21,8 +19,6 @@ const FAQ = () => {
   );
 };
 
-
-
 const Hero = () => {
   return (
     <section className="hero is-primary">
@@ -36,7 +32,10 @@ const Hero = () => {
             </div>
             <div className="level-right">
               <div className="level-item">
-                <a href="https://github.com/ArchKudo/bed-bugh" className="has-text-white">
+                <a
+                  href="https://github.com/ArchKudo/bed-bugh"
+                  className="has-text-white"
+                >
                   GitHub
                 </a>
               </div>
@@ -62,7 +61,7 @@ function App() {
   });
 
   const [text, setText] = useState<string>("");
-
+  const [dragOver, setDragOver] = useState<boolean>(false);
   const [sel, setSel] = useState<ExternalSelection>();
 
   const appendText = (newText: string) => {
@@ -91,11 +90,8 @@ function App() {
   };
 
   const resetSelection = () => {
-    // Reset selection to undefined when mouse is down
     setSel(undefined);
   };
-
-  // const posContext = useContext(CentralIndexContext);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -107,11 +103,10 @@ function App() {
 
       const lines = text.split("\n");
 
-      // Find the line under the cursor
       let currentLine = "";
       let cumulativeLength = 0;
       for (const line of lines) {
-        cumulativeLength += line.length + 1; // +1 for the newline character
+        cumulativeLength += line.length + 1;
         if (cursorPosition < cumulativeLength) {
           currentLine = line;
           break;
@@ -134,19 +129,80 @@ function App() {
     }
   };
 
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setDragOver(true);
+  };
+
+  const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setDragOver(false);
+  };
+
+  const handleDrop = async (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setDragOver(false);
+  
+    const file = event.dataTransfer.files[0];
+    const fileType = file.name.split(".").pop();
+  
+    if (fileType === "fasta") {
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const content = reader.result as string;
+        const { name, type, seq, annotations } = await seqparse(content, {fileName: file.name});
+        setSeq({ name, type, seq, annotations });
+      };
+      reader.readAsText(file);
+    } else if (fileType === "bed") {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setText(reader.result as string);
+      };
+      reader.readAsText(file);
+    } else {
+      alert("Unsupported file type");
+    }
+  };
+  
+
   return (
     <>
       <Hero />
       <div className="columns">
-        <div className="column is-half">
-          <div className="text-area full-size">
+        <div
+          className={`column is-half ${dragOver ? "is-dragover" : ""}`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          style={{ position: "relative" }}
+        >
+          <div className="text-area full-size" style={{ height: "100%" }}>
+            {dragOver && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  backgroundColor: "rgba(128,128,128,0.5)",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  zIndex: 10,
+                }}
+              >
+                <p>Drop .fasta for seqviz</p>
+              </div>
+            )}
             <div onMouseUp={resetSelection}>
               <SeqViz
                 style={{ height: "100vh" }}
                 name={seq.name}
                 seq={seq.seq}
                 annotations={seq.annotations}
-                seqType={seq.type == "unknown" ? undefined : seq.type}
+                seqType={seq.type === "unknown" ? undefined : seq.type}
                 viewer="linear"
                 selection={sel}
                 onSelection={handleSelection}
@@ -168,7 +224,31 @@ function App() {
             Find in FASTA
           </button>
         </div>
-        <div className="column is-four-fifths">
+        <div
+          className={`column is-four-fifths ${dragOver ? "is-dragover" : ""}`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          style={{ position: "relative" }}
+        >
+          {dragOver && (
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: "rgba(128,128,128,0.5)",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                zIndex: 10,
+              }}
+            >
+              <p>Drop .bed for textarea</p>
+            </div>
+          )}
           <textarea
             ref={textareaRef}
             id="bedArea"
