@@ -1,7 +1,7 @@
 import "bulma/css/bulma.min.css";
 import { useEffect, useState, useRef } from "react";
 import { SeqViz } from "seqviz";
-import { Selection } from "seqviz/dist/selectionContext";
+import { ExternalSelection, Selection } from "seqviz/dist/selectionContext";
 // import CentralIndexContext from "seqviz/dist/centralIndexContext";
 import seqparse, { Seq } from "seqparse";
 
@@ -14,6 +14,8 @@ function App() {
   });
 
   const [text, setText] = useState<string>("");
+
+  const [sel, setSel] = useState<ExternalSelection>();
 
   const appendText = (newText: string) => {
     setText((prevText) => prevText + "\n" + newText);
@@ -68,6 +70,8 @@ function App() {
         const firstNumber = parts[1];
         const secondNumber = parts[2];
         alert(`(${firstNumber}, ${secondNumber})`);
+        setSel({clockwise: true, start: parseInt(firstNumber), end: parseInt(secondNumber)})
+
       } else {
         alert("Invalid line format");
       }
@@ -86,6 +90,7 @@ function App() {
               annotations={seq.annotations}
               seqType={seq.type == "unknown" ? undefined : seq.type}
               viewer="linear"
+              selection={sel}
               onSelection={handleSelection}
             />
           </div>
