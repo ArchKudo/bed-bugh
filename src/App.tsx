@@ -42,6 +42,11 @@ function App() {
     appendText(str);
   };
 
+  const resetSelection = () => {
+    // Reset selection to undefined when mouse is down
+    setSel(undefined);
+  };
+
   // const posContext = useContext(CentralIndexContext);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -70,8 +75,11 @@ function App() {
         const firstNumber = parts[1];
         const secondNumber = parts[2];
         alert(`(${firstNumber}, ${secondNumber})`);
-        setSel({clockwise: true, start: parseInt(firstNumber), end: parseInt(secondNumber)})
-
+        setSel({
+          clockwise: true,
+          start: parseInt(firstNumber),
+          end: parseInt(secondNumber),
+        });
       } else {
         alert("Invalid line format");
       }
@@ -83,16 +91,18 @@ function App() {
       <div className="columns">
         <div className="column is-half">
           <div className="text-area full-size">
-            <SeqViz
-              style={{ height: "100vh" }}
-              name={seq.name}
-              seq={seq.seq}
-              annotations={seq.annotations}
-              seqType={seq.type == "unknown" ? undefined : seq.type}
-              viewer="linear"
-              selection={sel}
-              onSelection={handleSelection}
-            />
+            <div onMouseUp={resetSelection}>
+              <SeqViz
+                style={{ height: "100vh" }}
+                name={seq.name}
+                seq={seq.seq}
+                annotations={seq.annotations}
+                seqType={seq.type == "unknown" ? undefined : seq.type}
+                viewer="linear"
+                selection={sel}
+                onSelection={handleSelection}
+              />
+            </div>
           </div>
         </div>
         <div className="column is-flex is-justify-content-center is-flex-direction-column">
