@@ -1,5 +1,5 @@
 import "bulma/css/bulma.min.css";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import { SeqViz } from "seqviz";
 import { ExternalSelection, Selection } from "seqviz/dist/selectionContext";
 import seqparse, { Seq } from "seqparse";
