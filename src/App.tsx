@@ -6,8 +6,8 @@ import seqparse, { Seq } from "seqparse";
 
 const FAQ = () => {
   return (
-    <section id="faq" className="section">
-      <div className="container">
+
+      <div className="footer" id="faq">
         <h1 className="title">FAQ</h1>
         <div className="content">
           <ul>
@@ -15,40 +15,31 @@ const FAQ = () => {
           </ul>
         </div>
       </div>
-    </section>
+
   );
 };
 
 const Hero = () => {
   return (
-    <section className="hero is-primary">
-      <div className="hero-body">
-        <div className="container">
-          <div className="level">
-            <div className="level-left">
-              <div className="level-item">
-                <h1 className="title">बेड बघ</h1>
-              </div>
-            </div>
-            <div className="level-right">
-              <div className="level-item">
-                <a
-                  href="https://github.com/ArchKudo/bed-bugh"
-                  className="has-text-white"
-                >
-                  GitHub
-                </a>
-              </div>
-              <div className="level-item">
-                <a href="#faq" className="has-text-white">
-                  FAQ
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+    <nav className="navbar is-primary">
+      <div className="navbar-brand">
+        <a className="navbar-item" href="#">
+          <h1 className="title has-text-white">बेड बघ</h1>
+        </a>
       </div>
-    </section>
+
+      <div className="navbar-end">
+        <a
+          href="https://github.com/ArchKudo/bed-bugh"
+          className="navbar-item has-text-white"
+        >
+          GitHub
+        </a>
+        <a href="#faq" className="navbar-item has-text-white">
+          FAQ
+        </a>
+      </div>
+    </nav>
   );
 };
 
@@ -142,15 +133,17 @@ function App() {
   const handleDrop = async (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setDragOver(false);
-  
+
     const file = event.dataTransfer.files[0];
     const fileType = file.name.split(".").pop();
-  
+
     if (fileType === "fasta") {
       const reader = new FileReader();
       reader.onload = async () => {
         const content = reader.result as string;
-        const { name, type, seq, annotations } = await seqparse(content, {fileName: file.name});
+        const { name, type, seq, annotations } = await seqparse(content, {
+          fileName: file.name,
+        });
         setSeq({ name, type, seq, annotations });
       };
       reader.readAsText(file);
@@ -164,7 +157,6 @@ function App() {
       alert("Unsupported file type");
     }
   };
-  
 
   return (
     <>
