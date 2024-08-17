@@ -4,30 +4,7 @@ import { SeqViz } from "seqviz";
 import { ExternalSelection, Selection } from "seqviz/dist/selectionContext";
 import seqparse, { Seq } from "seqparse";
 import FAQ from "./components/FAQ"
-
-const Hero = () => {
-  return (
-    <nav className="navbar is-primary">
-      <div className="navbar-brand">
-        <a className="navbar-item" href="#">
-          <h1 className="title has-text-white">बेड बघ</h1>
-        </a>
-      </div>
-
-      <div className="navbar-end">
-        <a
-          href="https://github.com/ArchKudo/bed-bugh"
-          className="navbar-item has-text-white"
-        >
-          GitHub
-        </a>
-        <a href="#faq" className="navbar-item has-text-white">
-          FAQ
-        </a>
-      </div>
-    </nav>
-  );
-};
+import Hero from "./components/Hero"
 
 function App() {
   const [seq, setSeq] = useState<Seq>({
