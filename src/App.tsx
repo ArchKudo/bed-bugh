@@ -3,8 +3,9 @@ import { useEffect, useState, useRef } from "react";
 import { SeqViz } from "seqviz";
 import { ExternalSelection, Selection } from "seqviz/dist/selectionContext";
 import seqparse, { Seq } from "seqparse";
-import FAQ from "./components/FAQ"
-import Hero from "./components/Hero"
+import FAQ from "./components/FAQ";
+import Hero from "./components/Hero";
+import Bed from "./components/Bed";
 
 function App() {
   const [seq, setSeq] = useState<Seq>({
@@ -31,15 +32,15 @@ function App() {
     fetchFASTA();
   }, []);
 
-  let selections: Selection[] = [];
+  const selections: Selection[] = [];
 
-  let handleSelection = (selection: Selection) => {
+  const handleSelection = (selection: Selection) => {
     selections.push(selection);
   };
 
-  let handleCopyToBED = () => {
+  const handleCopyToBED = () => {
     const pos = selections.pop();
-    let str = `NC_001416.1\t${pos?.start}\t${pos?.end}`;
+    const str = `NC_001416.1\t${pos?.start}\t${pos?.end}`;
     appendText(str);
   };
 
@@ -49,7 +50,7 @@ function App() {
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  let handleFindInFasta = () => {
+  const handleFindInFasta = () => {
     const textArea = textareaRef.current;
     if (textArea) {
       const text = textArea.value;
@@ -204,15 +205,7 @@ function App() {
               <p>Drop .bed for textarea</p>
             </div>
           )}
-          <textarea
-            ref={textareaRef}
-            id="bedArea"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            className="textarea has-fixed-size"
-            placeholder="Enter BED File"
-            style={{ height: "100%", maxHeight: "100%" }}
-          />
+        <Bed text={text} textareaRef={textareaRef} setText={setText} />
         </div>
       </div>
       <FAQ />

@@ -1,5 +1,4 @@
 import "bulma/css/bulma.min.css";
-import {id as faqID} from "./FAQ";
 
 
 const Hero = () => {
@@ -18,8 +17,7 @@ const Hero = () => {
           >
             GitHub
           </a>
-          {/* TODO: Use native react references? */}
-          <a href={`#${faqID}`} className="navbar-item has-text-white">
+          <a href="#faq" className="navbar-item has-text-white">
             FAQ
           </a>
         </div>
