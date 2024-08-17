@@ -59,6 +59,7 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 - [ ] Integration tests
 - [ ] Support hg38
 - [ ] faidx support
+- [ ] Switch to a better css framework (mantine?)
 
 ### Defer to v0.3
 

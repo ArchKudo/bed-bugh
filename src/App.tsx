@@ -3,21 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { SeqViz } from "seqviz";
 import { ExternalSelection, Selection } from "seqviz/dist/selectionContext";
 import seqparse, { Seq } from "seqparse";
-
-const FAQ = () => {
-  return (
-
-      <div className="footer" id="faq">
-        <h1 className="title">FAQ</h1>
-        <div className="content">
-          <ul>
-            <li>What does this app do?</li>
-          </ul>
-        </div>
-      </div>
-
-  );
-};
+import FAQ from "./components/FAQ"
 
 const Hero = () => {
   return (
