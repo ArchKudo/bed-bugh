@@ -29,6 +29,11 @@ Compliments [Bed Bugs](https://labs.epi2me.io/bed-bugs/)
 
 - [x] Add drag and drop
 
+### v0.0.5~alpha
+
+- Returning from holiday edition
+- [ ] Simple refactoring to make components more sensible, and I remember what I did before
+
 ### v0.0.5
 
 - [ ] Track fasta name, and add correct fasta to bed
