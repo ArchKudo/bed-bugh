@@ -1,12 +1,12 @@
 import "bulma/css/bulma.min.css";
 import { useEffect, useState, useRef } from "react";
-import { SeqViz } from "seqviz";
-import { ExternalSelection, Selection } from "seqviz/dist/selectionContext";
 import seqparse, { Seq } from "seqparse";
+import { ExternalSelection, Selection } from "seqviz/dist/selectionContext";
 import FAQ from "./components/FAQ";
 import Hero from "./components/Hero";
 import Bed from "./components/Bed";
 import Buttons from "./components/Buttons";
+import Fasta from "./components/Fasta";
 
 function App() {
   const [seq, setSeq] = useState<Seq>({
@@ -19,6 +19,7 @@ function App() {
   const [text, setText] = useState<string>("");
   const [dragOver, setDragOver] = useState<boolean>(false);
   const [sel, setSel] = useState<ExternalSelection>();
+  const [selections, setSelections] = useState<Selection[]>([]);
 
   const appendText = (newText: string) => {
     setText((prevText) => prevText + "\n" + newText);
@@ -33,20 +34,12 @@ function App() {
     fetchFASTA();
   }, []);
 
-  const selections: Selection[] = [];
-
-  const handleSelection = (selection: Selection) => {
-    selections.push(selection);
-  };
-
   const handleCopyToBED = () => {
-    const pos = selections.pop();
-    const str = `NC_001416.1\t${pos?.start}\t${pos?.end}`;
-    appendText(str);
-  };
-
-  const resetSelection = () => {
-    setSel(undefined);
+    const pos = selections[selections.length - 1];
+    if (pos) {
+      const str = `NC_001416.1\t${pos.start}\t${pos.end}`;
+      appendText(str);
+    }
   };
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -153,18 +146,13 @@ function App() {
                 <p>Drop .fasta for seqviz</p>
               </div>
             )}
-            <div onMouseUp={resetSelection}>
-              <SeqViz
-                style={{ height: "100vh" }}
-                name={seq.name}
-                seq={seq.seq}
-                annotations={seq.annotations}
-                seqType={seq.type === "unknown" ? undefined : seq.type}
-                viewer="linear"
-                selection={sel}
-                onSelection={handleSelection}
-              />
-            </div>
+            <Fasta
+              seq={seq}
+              sel={sel}
+              setSel={setSel}
+              selections={selections} // Pass the selections state
+              setSelections={setSelections} // Pass the setter to update selections
+            />
           </div>
         </div>
         <Buttons
