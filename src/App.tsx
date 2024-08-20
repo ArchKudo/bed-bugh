@@ -6,6 +6,7 @@ import seqparse, { Seq } from "seqparse";
 import FAQ from "./components/FAQ";
 import Hero from "./components/Hero";
 import Bed from "./components/Bed";
+import Buttons from "./components/Buttons";
 
 function App() {
   const [seq, setSeq] = useState<Seq>({
@@ -166,20 +167,10 @@ function App() {
             </div>
           </div>
         </div>
-        <div className="column is-flex is-justify-content-center is-flex-direction-column">
-          <button
-            className="button is-primary is-outlined"
-            onClick={handleCopyToBED}
-          >
-            Copy selection to BED
-          </button>
-          <button
-            className="button is-primary is-inverted is-outlined"
-            onClick={handleFindInFasta}
-          >
-            Find in FASTA
-          </button>
-        </div>
+        <Buttons
+          handleCopyToBED={handleCopyToBED}
+          handleFindInFasta={handleFindInFasta}
+        />
         <div
           className={`column is-four-fifths ${dragOver ? "is-dragover" : ""}`}
           onDragOver={handleDragOver}
@@ -205,7 +196,7 @@ function App() {
               <p>Drop .bed for textarea</p>
             </div>
           )}
-        <Bed text={text} textareaRef={textareaRef} setText={setText} />
+          <Bed text={text} textareaRef={textareaRef} setText={setText} />
         </div>
       </div>
       <FAQ />
