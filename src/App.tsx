@@ -119,72 +119,53 @@ function App() {
   return (
     <>
       <Hero />
-      <div className="columns">
-        <div
-          className={`column is-half ${dragOver ? "is-dragover" : ""}`}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-          style={{ position: "relative" }}
-        >
-          <div className="text-area full-size" style={{ height: "100%" }}>
-            {dragOver && (
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  backgroundColor: "rgba(128,128,128,0.5)",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  zIndex: 10,
-                }}
-              >
-                <p>Drop .fasta for seqviz</p>
-              </div>
-            )}
+      <div
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        style={{ position: "relative" }}
+      >
+        {dragOver && (
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: "rgba(128,128,128,0.5)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 1000,
+            }}
+          >
+            <p>
+              Drop your <strong>.fasta</strong> or <strong>.bed</strong> file
+              here
+            </p>
+          </div>
+        )}
+
+        <div className="columns">
+          <div className="column is-half">
             <Fasta
               seq={seq}
               sel={sel}
               setSel={setSel}
-              selections={selections} // Pass the selections state
-              setSelections={setSelections} // Pass the setter to update selections
+              selections={selections}
+              setSelections={setSelections}
             />
           </div>
-        </div>
-        <Buttons
-          handleCopyToBED={handleCopyToBED}
-          handleFindInFasta={handleFindInFasta}
-        />
-        <div
-          className={`column is-four-fifths ${dragOver ? "is-dragover" : ""}`}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-          style={{ position: "relative" }}
-        >
-          {dragOver && (
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundColor: "rgba(128,128,128,0.5)",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                zIndex: 10,
-              }}
-            >
-              <p>Drop .bed for textarea</p>
-            </div>
-          )}
-          <Bed text={text} textareaRef={textareaRef} setText={setText} />
+
+          <Buttons
+            handleCopyToBED={handleCopyToBED}
+            handleFindInFasta={handleFindInFasta}
+          />
+
+          <div className="column is-four-fifths">
+            <Bed text={text} textareaRef={textareaRef} setText={setText} />
+          </div>
         </div>
       </div>
       <FAQ />
