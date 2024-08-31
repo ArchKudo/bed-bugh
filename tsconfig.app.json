@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "composite": true,
+    "types": ["node", "@testing-library/jest-dom", "vitest/globals"],
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
     "useDefineForClassFields": true,
@@ -22,6 +22,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
+    "paths": {
+      "@/*": ["./src/*"],
+      "@test-utils": ["./test-utils"]
+    }
   },
-  "include": ["src"]
+  "include": ["src", "test-utils"]
 }
