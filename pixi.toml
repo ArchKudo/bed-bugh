@@ -5,11 +5,16 @@ name = "bed-bugh"
 platforms = ["linux-64"]
 version = "0.1.0"
 
+[dependencies]
+deno = ">=2.9.5,<2.10"
+watchexec = ">=2.7.3,<3"
+
 [tasks]
 install = "deno install"
 dev = { cmd = "deno task dev", depends-on = ["install"] }
 build = { cmd = "deno task build", depends-on = ["install"] }
 preview = { cmd = "deno task preview", depends-on = ["install"] }
 
-[dependencies]
-deno = ">=2.9.5,<2.10"
+[tasks.preview-watch]
+cmd = 'watchexec --restart --watch . --ignore dist --ignore node_modules --ignore .pixi --exts ts,tsx,js,jsx,json,css,html -- "deno task build && deno task preview"'
+depends-on = ["install"]

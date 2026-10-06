@@ -20,6 +20,7 @@ function App() {
   const [dragOver, setDragOver] = useState<boolean>(false);
   const [sel, setSel] = useState<ExternalSelection>();
   const [selections, setSelections] = useState<Selection[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const appendText = (newText: string) => {
     setText((prevText) => prevText + "\n" + newText);
@@ -29,6 +30,7 @@ function App() {
     const fetchFASTA = async () => {
       const result = await seqparse("NC_001416.1");
       setSeq(result);
+      setLoading(false);
     };
 
     fetchFASTA();
@@ -93,9 +95,13 @@ function App() {
     setDragOver(false);
 
     const file = event.dataTransfer.files[0];
+    if (!file) {
+      return;
+    }
     const fileType = file.name.split(".").pop();
 
     if (fileType === "fasta") {
+      setLoading(true);
       const reader = new FileReader();
       reader.onload = async () => {
         const content = reader.result as string;
@@ -103,6 +109,7 @@ function App() {
           fileName: file.name,
         });
         setSeq({ name, type, seq, annotations });
+        setLoading(false);
       };
       reader.readAsText(file);
     } else if (fileType === "bed") {
@@ -150,6 +157,7 @@ function App() {
         <div className="columns">
           <div className="column is-half">
             <Fasta
+              loading={loading}
               seq={seq}
               sel={sel}
               setSel={setSel}

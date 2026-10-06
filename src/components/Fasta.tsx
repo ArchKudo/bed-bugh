@@ -3,6 +3,7 @@ import { ExternalSelection, Selection } from "../types/seqviz";
 import { Seq } from "seqparse";
 
 interface FastaProps {
+  loading: boolean;
   seq: Seq;
   sel: ExternalSelection | undefined;
   setSel: (sel: ExternalSelection | undefined) => void;
@@ -11,6 +12,7 @@ interface FastaProps {
 }
 
 const Fasta: React.FC<FastaProps> = ({
+  loading,
   seq,
   sel,
   setSel,
@@ -25,6 +27,29 @@ const Fasta: React.FC<FastaProps> = ({
     setSelections([...selections, selection]);
   };
 
+  if (loading) {
+    return (
+      <div
+        role="status"
+        aria-live="polite"
+        style={{
+          display: "flex",
+          height: "100vh",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "1rem"
+        }}
+        >
+          <button
+            className="button is-loading"
+            disabled
+            aria-hidden="true"
+            tabIndex={-1}
+          />
+          <span>Loading FASTA...</span>
+        </div>
+    )
+  }
   return (
     <div onMouseUp={resetSelection}>
       <SeqViz
