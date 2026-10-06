@@ -1,5 +1,5 @@
 import { SeqViz } from "seqviz";
-import { ExternalSelection, Selection } from "seqviz/dist/selectionContext";
+import { ExternalSelection, Selection } from "../types/seqviz";
 import { Seq } from "seqparse";
 
 interface FastaProps {

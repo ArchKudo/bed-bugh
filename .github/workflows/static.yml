@@ -2,14 +2,11 @@
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ['main']
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -30,20 +27,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Set up deno
+        uses: denoland/setup-deno@v2
         with:
-          bun-version: "latest"
+          deno-version: "v2.x"
       - name: Install dependencies
-        run: bun install
+        run: deno install --frozen
       - name: Build
-        run: bun run build
+        run: deno task build
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload dist folder
           path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment

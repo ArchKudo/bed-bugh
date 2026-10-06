@@ -1,7 +1,7 @@
 import "bulma/css/bulma.min.css";
 import { useEffect, useState, useRef } from "react";
 import seqparse, { Seq } from "seqparse";
-import { ExternalSelection, Selection } from "seqviz/dist/selectionContext";
+import type { ExternalSelection, Selection } from "./types/seqviz";
 import FAQ from "./components/FAQ";
 import Hero from "./components/Hero";
 import Bed from "./components/Bed";

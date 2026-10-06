@@ -1,0 +1,15 @@
+[workspace]
+authors = ["Girish Vλas <vgd.vyas17@gmail.com>"]
+channels = ["conda-forge"]
+name = "bed-bugh"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+install = "deno install"
+dev = { cmd = "deno task dev", depends-on = ["install"] }
+build = { cmd = "deno task build", depends-on = ["install"] }
+preview = { cmd = "deno task preview", depends-on = ["install"] }
+
+[dependencies]
+deno = ">=2.9.5,<2.10"
